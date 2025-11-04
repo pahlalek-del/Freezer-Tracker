@@ -1,11 +1,15 @@
-const jsonHeaders = {
+const baseHeaders = {
   "content-type": "application/json; charset=utf-8",
   "access-control-allow-origin": "*",
   "access-control-allow-methods": "GET, POST, OPTIONS",
-  "access-control-allow-headers": "content-type, authorization"
+  "access-control-allow-headers": "content-type, authorization",
+  "cache-control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+  "pragma": "no-cache",
+  "expires": "0",
+  "surrogate-control": "no-store"
 };
-function ok(body) { return new Response(JSON.stringify(body), { headers: jsonHeaders, status: 200 }); }
-function bad(status, msg) { return new Response(JSON.stringify({ ok:false, error: msg }), { headers: jsonHeaders, status }); }
+function ok(body) { return new Response(JSON.stringify(body), { headers: baseHeaders, status: 200 }); }
+function bad(status, msg) { return new Response(JSON.stringify({ ok:false, error: msg }), { headers: baseHeaders, status }); }
 async function readDoc(env, key){
   const res = await env.FRYSER.get(key, { type: "json" });
   if (!res) return { items: [], version: 0, updatedAt: new Date().toISOString() };
@@ -16,7 +20,7 @@ async function writeDoc(env, key, doc){
   await env.FRYSER.put(key, JSON.stringify(payload));
   return payload;
 }
-export const onRequestOptions = async () => new Response("", { status: 204, headers: jsonHeaders });
+export const onRequestOptions = async () => new Response("", { status: 204, headers: baseHeaders });
 export const onRequestGet = async ({ request, env }) => {
   const url = new URL(request.url);
   const id = (url.searchParams.get("id") || "").trim();
