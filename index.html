@@ -132,7 +132,7 @@ kbd{background:#eef1ff;border:1px solid #dfe3ff;border-radius:6px;padding:2px 6p
         </div>
         <div class="row">
           <div>
-            <label for="frozenDate">Dato indfrosset</label>
+            <label for="frozenDate">Nedfrosset d.</label>
             <input id="frozenDate" name="frozenDate" type="date">
           </div>
           <div>
@@ -175,7 +175,7 @@ kbd{background:#eef1ff;border:1px solid #dfe3ff;border-radius:6px;padding:2px 6p
             <label for="sortBy">Sorter efter</label>
             <select id="sortBy">
               <option value="name">Navn (A→Å)</option>
-              <option value="frozenDate">Indfrosset (nyeste først)</option>
+              <option value="frozenDate">Nedfrosset (nyeste først)</option>
               <option value="bestBefore">Bedst før (tættest først)</option>
               <option value="qty">Mængde (størst først)</option>
             </select>
@@ -211,7 +211,7 @@ kbd{background:#eef1ff;border:1px solid #dfe3ff;border-radius:6px;padding:2px 6p
           <th>Mængde</th>
           <th>Kategori</th>
           <th>Placering</th>
-          <th>Indfrosset</th>
+          <th>Nedfrosset</th>
           <th>Bedst før</th>
           <th>Status</th>
           <th>Handlinger</th>
@@ -375,7 +375,7 @@ function render(){
       <td data-label="Mængde">${Number(it.qty||0)} ${escapeHtml(it.unit||'')}</td>
       <td data-label="Kategori">${escapeHtml(it.category||'—')}</td>
       <td data-label="Placering">${escapeHtml(it.location||'—')}</td>
-      <td data-label="Indfrosset">${fmt(it.frozenDate)}</td>
+      <td data-label="Nedfrosset">${fmt(it.frozenDate)}</td>
       <td data-label="Bedst før">${fmt(it.bestBefore)}</td>
       <td data-label="Status">${statusBadge(it)}</td>
       <td data-label="Handlinger" class="actions">
