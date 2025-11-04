@@ -7,30 +7,36 @@
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0b5cff">
 <style>
-:root{--bg:#0b5cff;--ink:#0b1320;--muted:#5a6b9c;--card:#ffffff;--accent:#0b5cff;--danger:#c7232f;--warn:#b36a00;--ok:#0b7d3b;--radius:14px;--shadow:0 6px 24px rgba(11,19,32,0.08)}
-*{box-sizing:border-box}
-html,body{height:100%}
-body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Arial,'Noto Sans',sans-serif;color:var(--ink);background:linear-gradient(145deg,var(--bg) 0%,#1b6cff 60%,#2c7dff 100%)}
-.container{max-width:1100px;margin:0 auto;padding:16px}
-header{color:#fff;padding:28px 8px 12px}
-h1{margin:0 0 8px;font-size:clamp(24px,4vw,36px)}
-.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;margin:12px 0}
+:root{
+  --bg:#0b5cff;--ink:#0b1320;--muted:#5a6b9c;--card:#ffffff;
+  --accent:#0b5cff;--danger:#c7232f;--warn:#b36a00;--ok:#0b7d3b;
+  --radius:16px;--shadow:0 8px 28px rgba(11,19,32,0.10)
+}
+*{box-sizing:border-box} html,body{height:100%}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Arial,'Noto Sans',sans-serif;color:var(--ink);
+  background:linear-gradient(145deg,var(--bg) 0%,#1b6cff 60%,#2c7dff 100%)}
+.container{max-width:1024px;margin:0 auto;padding:16px}
+header{color:#fff;padding:18px 8px 12px;display:flex;align-items:center;gap:12px}
+h1{margin:0;font-size:clamp(20px,4.5vw,32px)}
+.logo{width:40px;height:40px;flex:0 0 auto;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.15)}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px;margin:12px 0}
 .grid{display:grid;gap:12px}
-@media(min-width:820px){.grid-2{grid-template-columns:1fr 1.2fr}}
+@media(min-width:880px){.grid-2{grid-template-columns:1fr 1.1fr}}
 fieldset{border:1px solid #e6e8f0;border-radius:12px;padding:12px}
 legend{padding:0 8px;color:var(--muted)}
-label{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}
-input[type="text"],input[type="number"],input[type="date"],select,textarea{width:100%;padding:10px 12px;border-radius:10px;border:1px solid #d9deea;background:#fff}
+label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+input[type="text"],input[type="number"],input[type="date"],select,textarea{
+  width:100%;padding:12px 14px;border-radius:12px;border:1px solid #d9deea;background:#fff;font-size:16px}
 textarea{min-height:60px;resize:vertical}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:520px){.row{grid-template-columns:1fr}}
-button{border:0;border-radius:10px;padding:10px 14px;cursor:pointer;font-weight:600}
+@media(max-width:600px){.row{grid-template-columns:1fr}}
+button{border:0;border-radius:12px;padding:12px 16px;cursor:pointer;font-weight:700;font-size:16px}
 .btn{background:var(--accent);color:#fff}
 .btn.secondary{background:#eef2ff;color:#1e2a55}
 .btn.warn{background:var(--warn);color:#fff}
 .btn.danger{background:#c7232f;color:#fff}
 .btn.ghost{background:transparent;border:1px solid #d9deea;color:#1e244d}
-.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .table{width:100%;border-collapse:separate;border-spacing:0 8px}
 thead th{font-size:12px;color:var(--muted);text-align:left;padding:0 8px}
 tbody tr{background:#fff;box-shadow:var(--shadow);border-radius:12px;overflow:hidden}
@@ -39,34 +45,44 @@ tbody td{padding:12px 8px;vertical-align:top}
 .badge.expiring{background:#fff4d9;color:#7a4b00}
 .badge.expired{background:#ffe3e6;color:#7a0011}
 .badge.ok{background:#e9fff3;color:#005222}
-.actions{display:flex;gap:6px;flex-wrap:wrap}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.actions .btn{flex:1 1 48%; min-width:44px}
 .counts{color:#fff;opacity:0.95;display:flex;gap:14px;flex-wrap:wrap}
 small.help{color:var(--muted)}
 kbd{background:#eef1ff;border:1px solid #dfe3ff;border-radius:6px;padding:2px 6px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace}
-.status{display:flex;align-items:center;gap:8px;color:#fff;opacity:0.95}
+.status{display:flex;align-items:center;gap:8px;color:#fff;opacity:0.95;margin-left:auto}
 .status .dot{width:10px;height:10px;border-radius:999px;background:#ffd147}
 .status.ok .dot{background:#13b24c}
 .status.off .dot{background:#ffd147}
 .status.err .dot{background:#ff4056}
-.linkbox{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-input.inline{width:auto;min-width:280px}
-hr{border:0;border-top:1px solid #eef0f8;margin:12px 0}
+
+@media(max-width:700px){
+  /* Responsive table → cards */
+  .table, thead, tbody, th, td, tr { display:block; width:100% }
+  thead { display:none }
+  tbody tr { padding:10px }
+  tbody td { display:grid; grid-template-columns: 130px 1fr; align-items:start; gap:6px; padding:10px 8px }
+  tbody td::before { content: attr(data-label); font-size:12px; color:var(--muted) }
+  .actions { margin-top:6px }
+}
 </style>
 </head>
 <body>
 <div class="container">
   <header>
-    <h1>Min Fryser (Cloudflare Sync)</h1>
-    <p>Del med husstanden via et hemmeligt link. Virker offline – synkroniserer automatisk, når du er online.</p>
-    <div class="status" id="syncStatus"><span class="dot"></span><span id="syncText">Initialiserer…</span></div>
+    <img src="logo.png" alt="Fryser" class="logo" />
+    <div>
+      <h1>Min Fryser</h1>
+      <div class="status" id="syncStatus"><span class="dot"></span><span id="syncText">Initialiserer…</span></div>
+    </div>
   </header>
 
   <div class="card">
     <fieldset>
       <legend>Husstand</legend>
-      <div class="linkbox">
+      <div class="toolbar" style="gap:8px">
         <button class="btn secondary" id="createHousehold">Opret ny husstand</button>
-        <input class="inline" id="householdId" placeholder="Husstands-ID (skriv eller indsæt)" />
+        <input class="inline" id="householdId" placeholder="Husstands-ID (skriv eller indsæt)" style="min-width:220px;flex:1 1 auto"/>
         <button class="btn" id="applyHousehold">Brug ID</button>
         <button class="btn ghost" id="copyShare">Kopiér delingslink</button>
       </div>
@@ -339,14 +355,14 @@ function render(){
   for(const it of list){
     const tr = document.createElement('tr'); tr.tabIndex=0; tr.dataset.id=it.id;
     tr.innerHTML = `
-      <td><strong>${escapeHtml(it.name || '')}</strong>${it.notes ? '<br><small class="help">'+escapeHtml(it.notes)+'</small>' : ''}</td>
-      <td>${Number(it.qty||0)} ${escapeHtml(it.unit||'')}</td>
-      <td>${escapeHtml(it.category||'—')}</td>
-      <td>${escapeHtml(it.location||'—')}</td>
-      <td>${fmt(it.frozenDate)}</td>
-      <td>${fmt(it.bestBefore)}</td>
-      <td>${statusBadge(it)}</td>
-      <td class="actions">
+      <td data-label="Vare"><strong>${escapeHtml(it.name || '')}</strong>${it.notes ? '<br><small class="help">'+escapeHtml(it.notes)+'</small>' : ''}</td>
+      <td data-label="Mængde">${Number(it.qty||0)} ${escapeHtml(it.unit||'')}</td>
+      <td data-label="Kategori">${escapeHtml(it.category||'—')}</td>
+      <td data-label="Placering">${escapeHtml(it.location||'—')}</td>
+      <td data-label="Indfrosset">${fmt(it.frozenDate)}</td>
+      <td data-label="Bedst før">${fmt(it.bestBefore)}</td>
+      <td data-label="Status">${statusBadge(it)}</td>
+      <td data-label="Handlinger" class="actions">
         <button class="btn secondary" data-action="inc">+1</button>
         <button class="btn secondary" data-action="dec">-1</button>
         <button class="btn ghost" data-action="edit">Rediger</button>
