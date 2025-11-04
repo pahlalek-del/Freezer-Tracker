@@ -122,8 +122,12 @@ kbd{background:#eef1ff;border:1px solid #dfe3ff;border-radius:6px;padding:2px 6p
             </select>
           </div>
           <div>
-            <label for="location">Placering (skuffe/hylde)</label>
-            <input id="location" name="location" type="text" placeholder="Fx 'Skuffe 2'">
+            <label for="location">Placering</label>
+            <select id="location" name="location">
+              <option value="">(vælg)</option>
+              <option>Køkkenfryse</option>
+              <option>Kummefryser</option>
+            </select>
           </div>
         </div>
         <div class="row">
@@ -249,6 +253,18 @@ function loadLocal(){
 function saveLocal(){
   localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
   localStorage.setItem(HOUSEHOLD_KEY, householdId || '');
+}
+
+function ensureSelectOption(selectId, value){
+  if(!value) return;
+  const sel = document.getElementById(selectId);
+  if(!sel) return;
+  const exists = Array.from(sel.options).some(o => o.value === value);
+  if(!exists){
+    const opt = document.createElement('option');
+    opt.value = value; opt.textContent = value;
+    sel.appendChild(opt);
+  }
 }
 
 function setHousehold(id){
@@ -382,7 +398,7 @@ function addOrUpdateFromForm(){
   const id = $('#itemId').value || uid();
   const it = {
     id, name: $('#name').value.trim(), qty: parseFloat($('#qty').value||0), unit: $('#unit').value,
-    category: $('#category').value, location: $('#location').value.trim(),
+    category: $('#category').value, location: $('#location').value,
     frozenDate: $('#frozenDate').value || null, bestBefore: $('#bestBefore').value || null,
     notes: $('#notes').value.trim(), lastUpdated: nowMs()
   };
@@ -489,7 +505,9 @@ window.addEventListener('DOMContentLoaded', async () => {
         const it = items.find(x => x.id===id);
         if(it){
           $('#itemId').value = it.id; $('#name').value = it.name || ''; $('#qty').value = it.qty || 0; $('#unit').value = it.unit || 'stk';
-          $('#category').value = it.category || ''; $('#location').value = it.location || '';
+          $('#category').value = it.category || '';
+          ensureSelectOption('location', it.location || '');
+          $('#location').value = it.location || '';
           $('#frozenDate').value = it.frozenDate || ''; $('#bestBefore').value = it.bestBefore || ''; $('#notes').value = it.notes || '';
           $('#saveBtn').textContent = 'Opdatér'; $('#name').focus();
         }
