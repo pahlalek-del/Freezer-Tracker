@@ -1,0 +1,8 @@
+name = "fryser-pages"
+compatibility_date = "2024-12-01"
+
+# For local dev only – set KV ids if you want to test with `wrangler pages dev`
+# [[kv_namespaces]]
+# binding = "FRYSER"
+# id = "REPLACE_WITH_PROD_KV_ID"
+# preview_id = "REPLACE_WITH_PREVIEW_KV_ID"
